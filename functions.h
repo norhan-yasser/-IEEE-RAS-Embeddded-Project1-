@@ -1,4 +1,3 @@
-
 void create_customer();
 
 void edit_customer();
@@ -9,7 +8,12 @@ void  delete_customer();
 
 void deposite();
 
+bool transfer_money();
 
-bool transfer_money(struct customer *sender, struct customer *receiver, int amount);
+void withdrawMoney();
 
-bool withdrawMoney(struct customer *drawer, double amount);
+void loadCustomers() ;
+
+void saveCustomers();
+
+void depositMoney();

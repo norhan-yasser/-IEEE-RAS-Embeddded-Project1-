@@ -1,22 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "functions.h"
 
-FILE *customerFileP ;
-
-
-struct Customer_info {
-
-   char ID [18];
-   char name[50];
-   float balance;
-   char phoneNumber [50];
-
-};
 
 int main()
 {
-   struct Customer_info custumer[20];
+   loadCustomers();
    int option;
 
     printf("\n");
@@ -37,20 +27,24 @@ int main()
    scanf("%d",&option);
 
    switch (option) {
-     case 1 :
-       create_customer();
+     /*case 1 :
+        create_customer();
      case 2 :
-        edit_customer();
+        edit_customer();*/
      case 3 :
         print_customer_data();
+        break;
      case 4 :
         delete_customer();
+        break;
      case 5 :
-         deposite();
-     case 6 :
-         money_transfer();
+         depositMoney();
+         break;
+    /* case 6 :
+         transfer_money();*/
      case 7 :
-         withdraw();
+         withdrawMoney();
+         break;
      case 8 :
           return 0 ;
      default :
