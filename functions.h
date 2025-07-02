@@ -1,15 +1,30 @@
-#ifndef FUNCTIONS_H_INCLUDED
-#define FUNCTIONS_H_INCLUDED
+
+#ifndef FUNCTIONS_H      // If FUNCTIONS_H is not defined
+#define FUNCTIONS_H      // Define it now
 
 
-struct Customer {
-    int id;
-    char name[50];
-    char phone[15];
-    float cash;
-};
 
-void addCustomer(struct Customer customers[], int *count);
-void updateCustomer(struct Customer customers[], int count);
+void create_customer();
 
-#endif // FUNCTIONS_H_INCLUDED
+void edit_customer();
+
+void print_customer_data();
+
+void  delete_customer();
+
+void deposite();
+
+void transfer_money();
+
+void withdrawMoney();
+
+void loadCustomers() ;
+
+void saveCustomers();
+
+void depositMoney();
+
+bool idCheck (int id);
+
+
+#endif                   // End of guard
