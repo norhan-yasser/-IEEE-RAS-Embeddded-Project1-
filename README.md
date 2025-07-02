@@ -86,9 +86,9 @@ Customer data is stored in customers.txt in this format:
 - Easily extensible with additional features
 
 ## Authors
-Norhan yasser
-Abdelrahman Mohamed
-Aya Ali
-Ahmed Shehata
+- Norhan yasser
+- Abdelrahman Mohamed
+- Aya Ali
+- Ahmed Shehata
 
 
