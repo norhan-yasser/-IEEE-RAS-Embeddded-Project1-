@@ -9,7 +9,7 @@ int main()
    loadCustomers();
    int option;
 
-    printf("\n");
+   printf("\n");
    printf("\t\t\t Welcome to Banque Ras \n");
    printf("\t\t-------------------------------------\n");
    printf("\t\t1.create customer\n");
