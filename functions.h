@@ -1,5 +1,4 @@
 
-
 #ifndef FUNCTIONS_H      // If FUNCTIONS_H is not defined
 #define FUNCTIONS_H      // Define it now
 
