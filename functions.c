@@ -23,26 +23,35 @@ void  create_customer(){
 
     //check if customers is full
      if (customerCount >= 100) {
-        printf("Customer list is full.\n");
+        printf("\t\tCustomer list is full.\n");
         return;
     }
 
     struct Customer c; //struct to temporarily save the data
-
+    int tryCount=0;
     // Loop until a valid and unique ID is entered
     while(1) {
 
-    printf("Enter Customer ID: ");
+
+    if (tryCount==3){
+        printf("\t\tTry again later \n");
+        return;
+    }
+
+    printf("\t\tEnter Customer ID: ");
     scanf("%d", &searchId);
+    tryCount++;
 
     //making sure ID is only 4 digits
     if (!idCheck(searchId)) {
-        printf("ID must be exactly 4 digits.\n");
+        printf("\t\tID must be exactly 4 digits.\n");
         continue;
     }
+
+
       // Loop until a valid and unique ID is entered
       if (findCustomerById(searchId)!=-1){
-         printf("This ID already exists .");
+         printf("\t\tThis ID already exists .\n");
       } else {
           // ID is valid and unique, assign to customer
           c.id=searchId;
@@ -52,25 +61,25 @@ void  create_customer(){
 
 
     // Read customer name
-    printf("Enter name: ");
+    printf("\t\tEnter name: ");
     scanf(" %[^\n]", c.name);
 
     // Loop until a valid (positive) balance is entered
     while(1) {
 
-    printf("Enter cash: ");
+    printf("\t\tEnter cash: ");
     scanf("%lf", &c.balance);
 
 
     if (c.balance <= 0) {
-        printf("Cash must be positive.\n");
+        printf("\t\tCash must be positive.\n");
 
     }else { break ;}
 
     }
 
     // Read phone number
-    printf("Enter phone: ");
+    printf("\t\tEnter phone: ");
     scanf(" %[^\n]", c.phone);
 
 
@@ -80,7 +89,7 @@ void  create_customer(){
 
     // Save to file
     saveCustomers();
-    printf("Customer added successfully.\n");
+    printf("\t\tCustomer added successfully.\n");
 
 }
 
@@ -88,7 +97,7 @@ void  create_customer(){
 //function to edit customer data (name,phone) by ID
 void edit_customer(){
 
-    printf("Enter customer ID to update te data : ");
+    printf("\t\tEnter customer ID to update te data : ");
     scanf("%d", &searchId);
 
     // Search for the customer by ID and get their index
@@ -97,23 +106,23 @@ void edit_customer(){
     // If the customer is not found, print an error and return
     if( index ==-1)
     {
-        printf("Customer with ID %d not found.\n", searchId);
+        printf("\t\tCustomer with ID %d not found.\n", searchId);
         return;
     }
 
      //Read new customer name
-     printf("Enter new name: ");
+     printf("\t\tEnter new name: ");
      scanf(" %[^\n]", customers[index].name);
 
      //Read new phone number
-     printf("Enter new phone: ");
+     printf("\t\tEnter new phone: ");
      scanf(" %[^\n]", customers[index].phone);
 
      //save changes to file
      saveCustomers();
 
      //inform customer the update is successfull
-     printf("Customer updated.\n");
+     printf("\t\tCustomer updated.\n");
      return;
 
 }
@@ -123,7 +132,7 @@ void edit_customer(){
 void print_customer_data(){
 
 
-    printf("Enter customer ID to print data : ");
+    printf("\t\tEnter customer ID to print data : ");
     scanf("%d", &searchId);
 
     // Search for the customer by ID and get their index
@@ -132,18 +141,18 @@ void print_customer_data(){
      // If the customer is not found, print an error and return
      if(index == -1)
     {
-        printf("YOUR ACCOUNT IS NOT AVAILABLE.\n");
+        printf("\t\tYOUR ACCOUNT IS NOT AVAILABLE.\n");
     }else {
 
     for(int i = 0; i < 4; i++) //printing customer data
     {
 
-            printf("\n\t=== Account Details ===\n");
-            printf("ID    : %d\n", customers[index].id);
-            printf("Name  : %s\n", customers[index].name);
-            printf("Cash  : %.2f\n", customers[index].balance);
-            printf("phone : %s\n", customers[index].phone);
-            printf("===========================\n");
+            printf("\n\t\t\t=== Account Details ===\n");
+            printf("\t\tID    : %d\n", customers[index].id);
+            printf("\t\tName  : %s\n", customers[index].name);
+            printf("\t\tCash  : %.2f\n", customers[index].balance);
+            printf("\t\tphone : %s\n", customers[index].phone);
+            printf("\t\t===========================\n");
             break;
     }}
 
@@ -154,7 +163,7 @@ void print_customer_data(){
 //Function to delete customer information by ID
 void delete_customer()
 {
-    printf("Enter customer ID to be deleted: ");
+    printf("\t\tEnter customer ID to be deleted: ");
     scanf("%d", &searchId);
 
     // Search for the customer by ID and get their index
@@ -164,7 +173,7 @@ void delete_customer()
     // If the customer is not found, print an error and return
     if( index ==-1)
     {
-        printf("Customer with ID %d not found.\n", searchId);
+        printf("\t\tCustomer with ID %d not found.\n", searchId);
         return;
     }
 
@@ -181,7 +190,7 @@ void delete_customer()
     saveCustomers();
 
      // Confirm deletion
-    printf("Customer deleted.\n");
+    printf("\t\tCustomer deleted.\n");
 
 }
 
@@ -190,24 +199,42 @@ void delete_customer()
 void depositMoney() {
 
     double amount;
-    printf("Enter customer ID to deposit: ");
-    scanf("%d", &searchId);
+    int tryCount=0; //the customer has 3 chances to enter id
+    int index;
 
-    // Search for the customer by ID and get their index
-    int index = findCustomerById(searchId);
+    // Loop until a valid and unique ID is entered
+    while(1) {
 
-    // If the customer is not found, print an error and return
-    if (index == -1) {
-        printf("Customer not found.\n");
+    //check chances is finished or not
+    if (tryCount==3){
+        printf("\t\tTry again later \n");
         return;
     }
 
-    printf("Enter amount to deposit: ");
+    printf("\t\tEnter Customer ID: ");
+    scanf("%d", &searchId);
+    tryCount++; // increment chances each read
+
+    index = findCustomerById(searchId); // Search for the customer by ID and get their index
+
+     // If the customer is not found, print an error
+    if (index == -1) {
+        printf("\t\tCustomer not found.\n");
+        continue;
+    }else {
+
+        break;}
+
+    }
+
+
+
+    printf("\t\tEnter amount to deposit: ");
     scanf("%lf", &amount);
 
     // Check if the entered amount is valid (greater than 0)
     if (amount <= 0) {
-        printf("Invalid amount.\n");
+        printf("\t\tInvalid amount.\n");
         return;
     }
 
@@ -218,7 +245,7 @@ void depositMoney() {
     saveCustomers();
 
      // Confirm Transaction
-    printf("Deposit successful. New balance: $%.2f\n", customers[index].balance);
+    printf("\t\tDeposit successful. New balance: $%.2f\n", customers[index].balance);
 }
 
 
@@ -226,49 +253,63 @@ void depositMoney() {
 void transfer_money(){
 
     double amount;
-    printf("Enter your ID : ");
-    scanf("%d", &searchId);
+    int indexSender;
+    int tryCount ;
 
-    // Search for the customer by ID and get their index
-    int indexSender = findCustomerById(searchId);
+    // Loop until a valid and unique ID is entered
+    while(1) {
 
-    // If the customer is not found, print an error and return
-    if (indexSender ==-1) {
-        printf("Customer not found.\n");
+    //check chances is finished or not
+    if (tryCount==3){
+        printf("\t\tTry again later \n");
         return;
     }
 
+    printf("\t\tEnter Customer ID: ");
+    scanf("%d", &searchId);
+    tryCount++; // increment chances each read
+
+    indexSender = findCustomerById(searchId); // Search for the customer by ID and get their index
+
+     // If the customer is not found, print an error
+    if (indexSender == -1) {
+        printf("\t\tCustomer not found.\n");
+        continue;
+    }else {break;}
+
+    }
+
     // Ask Customer to enter receiver ID
-    printf("Enter ID of the receiver:");
+    printf("\t\tEnter ID of the receiver:");
     scanf("%d", &searchId);
 
     // Search for the receiver by ID and get their index
     int indexRecievier = findCustomerById(searchId);
 
     if (indexRecievier ==-1) {
-        printf("Customer not found.\n");
+        printf("\t\tCustomer not found.\n");
         return;
     }
 
     // Making sure that the customer isn't a child.
     if (customers[indexSender].id == customers[indexRecievier].id) {
-        printf("Error: Cannot transfer to the same person.\n");
+        printf("\t\tError: Cannot transfer to the same person.\n");
         return ;
     }
 
 
-    printf("Enter amount to transfer: ");
+    printf("\t\tEnter amount to transfer: ");
     scanf("%lf", &amount);
 
 
     if (amount <= 0) {
-        printf("Invalid amount.\n");
+        printf("\t\tInvalid amount.\n");
         return;
     }
 
      if (customers[indexSender].balance < amount){
 
-        printf("Error: You don't have enough money.\n");
+        printf("\t\tError: You don't have enough money.\n");
         return;
     }
 
@@ -279,12 +320,12 @@ void transfer_money(){
     customers[indexRecievier].balance += amount;
 
     // Printing transfer details.
-    printf("Transfer sucsessful.\n");
-    printf("From: %s (ID: %d)\n",  customers[indexSender].name,  customers[indexSender].id);
-    printf("To: %s (ID: %d)\n", customers[indexRecievier].name, customers[indexRecievier].id);
-    printf("Amount: $%.2f\n", amount);
-    printf("New balance - %s: $%.2f\n", customers[indexSender].name, customers[indexSender].balance);
-    printf("New balance - %s: $%.2f\n", customers[indexRecievier].name, customers[indexRecievier].balance);
+    printf("\t\tTransfer sucsessful.\n");
+    printf("\t\tFrom: %s (ID: %d)\n",  customers[indexSender].name,  customers[indexSender].id);
+    printf("\t\tTo: %s (ID: %d)\n", customers[indexRecievier].name, customers[indexRecievier].id);
+    printf("\t\tAmount: $%.2f\n", amount);
+    printf("\t\tNew balance - %s: $%.2f\n", customers[indexSender].name, customers[indexSender].balance);
+    printf("\t\tNew balance - %s: $%.2f\n", customers[indexRecievier].name, customers[indexRecievier].balance);
 
 
 }
@@ -293,31 +334,45 @@ void transfer_money(){
 void withdrawMoney() {
 
     double amount;
-    printf("Enter customer ID to withdraw: ");
-    scanf("%d", &searchId);
+    int index;
+    int tryCount=0;
 
-    // Search for the customer by ID and get their index
-    int index = findCustomerById(searchId);
+      // Loop until a valid and unique ID is entered
+    while(1) {
 
-    // If the customer is not found, print an error and return
-    if (index ==-1) {
-        printf("Customer not found.\n");
+    //check chances is finished or not
+    if (tryCount==3){
+        printf("\t\tTry again later \n");
         return;
     }
 
-    printf("Enter amount to withdraw: ");
+    printf("\t\tEnter Customer ID: ");
+    scanf("%d", &searchId);
+    tryCount++; // increment chances each read
+
+    index = findCustomerById(searchId); // Search for the customer by ID and get their index
+
+     // If the customer is not found, print an error
+    if (index == -1) {
+        printf("\t\tCustomer not found.\n");
+        continue;
+    }else {break;}
+
+    }
+
+    printf("\t\tEnter amount to withdraw: ");
     scanf("%lf", &amount);
 
     // Check if the entered amount is valid (greater than 0)
     if (amount <= 0) {
-        printf("Invalid amount.\n");
+        printf("\t\tInvalid amount.\n");
         return;
     }
 
     //check if balance is more than the amount
     if (customers[index].balance < amount){
 
-        printf("Error: You don't have enough money.\n");
+        printf("\t\tError: You don't have enough money.\n");
         return;
     }
 
@@ -328,7 +383,7 @@ void withdrawMoney() {
     saveCustomers();
 
      // Confirm Transaction
-    printf("Withdraw successful. New balance: $%.2f\n", customers[index].balance);
+    printf("\t\tWithdraw successful. New balance: $%.2f\n", customers[index].balance);
 
 }
 
@@ -387,6 +442,7 @@ int findCustomerById(int id) {
     }
     return -1;
 }
+
 
 // Function to check if an ID is exactly 4 digits (between 1000 and 9999)
 // Returns true if valid, false otherwise
