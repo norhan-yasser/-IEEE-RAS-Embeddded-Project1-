@@ -8,7 +8,7 @@ void  delete_customer();
 
 void deposite();
 
-bool transfer_money();
+void transfer_money();
 
 void withdrawMoney();
 
@@ -17,3 +17,5 @@ void loadCustomers() ;
 void saveCustomers();
 
 void depositMoney();
+
+bool idCheck (int id);

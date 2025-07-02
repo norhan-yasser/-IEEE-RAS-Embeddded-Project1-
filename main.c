@@ -27,10 +27,12 @@ int main()
    scanf("%d",&option);
 
    switch (option) {
-     /*case 1 :
+     case 1 :
         create_customer();
+        break;
      case 2 :
-        edit_customer();*/
+        edit_customer();
+        break;
      case 3 :
         print_customer_data();
         break;
@@ -40,8 +42,9 @@ int main()
      case 5 :
          depositMoney();
          break;
-    /* case 6 :
-         transfer_money();*/
+     case 6 :
+         transfer_money();
+         break;
      case 7 :
          withdrawMoney();
          break;
@@ -55,3 +58,5 @@ int main()
 
      return 0 ;
 };
+
+
